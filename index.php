@@ -19,30 +19,21 @@ to the first one and removes left empty wrappers.
 
 
 add_action('admin_footer', function() {
-
 	$screen = get_current_screen();
 	if ( $screen->base == 'post' ) {
 		echo '
 		<!-- ACF Merge Tabs -->
-		<script>		
-
-			var $boxes = jQuery("#postbox-container-2 .postbox .field_type-tab").parent(".inside");
-
-			if ( $boxes.length > 1 ) {
-
-			    var $firstBox = $boxes.first();
-
-			    $boxes.not($firstBox).each(function(){
-				    jQuery(this).children().appendTo($firstBox);
-				    jQuery(this).parent(".postbox").remove();				    
-			    });
-				
-			}
-			
+		<script>
+		var $boxes = jQuery("#postbox-container-2 .postbox .field_type-tab, #postbox-container-2 .postbox .acf-field-tab").parent(".inside");
+		if ($boxes.length > 1) {
+		  var $firstBox = $boxes.first();
+		  $boxes.not($firstBox).each(function() {
+		    jQuery(this).children().appendTo($firstBox);
+		    jQuery(this).parent(".postbox").remove();
+		  });
+		}
 		</script>';
 	}
-	
 });
-
 
 ?>
